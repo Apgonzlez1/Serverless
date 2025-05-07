@@ -1,14 +1,18 @@
 const AWS = require("aws-sdk");
+
 exports.obtenerTasks = async (event) => {
   const dynamoDB = new AWS.DynamoDB.DocumentClient();
+
   const result = await dynamoDB
     .scan({
       TableName: "taskTable1",
     })
     .promise();
-const tareas = result.Items;
+
+  const tareas = result.Items;
+
   return {
-    status: 200,
-    body: tareas,
+    statusCode: 200,
+    body: JSON.stringify(tareas),
   };
 };

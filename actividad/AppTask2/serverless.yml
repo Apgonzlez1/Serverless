@@ -38,6 +38,19 @@ functions:
       - httpApi:
           path: /tareas/{id}
           method: get
+  eliminarTask:
+    handler: src/eliminarTask.eliminarTask
+    events:
+      - httpApi:
+          path: /tareas/{id}
+          method: delete
+  actualizarTask:
+    handler: src/actualizarTask.actualizarTask
+    events:
+      - httpApi:
+          path: /tareas/{id}
+          method: put
+
 
 resources: # CloudFormation template syntax desde aquí.
   Resources:
