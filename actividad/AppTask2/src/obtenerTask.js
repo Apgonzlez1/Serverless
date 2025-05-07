@@ -5,7 +5,7 @@ exports.obtenerTask = async (event) => {
   const result = await dynamoDB
     .get({
       TableName: "taskTable1",
-      key: {
+      Key: {
         id,
       },
     })
