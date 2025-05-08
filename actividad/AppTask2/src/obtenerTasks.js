@@ -1,18 +1,18 @@
 const AWS = require("aws-sdk");
-
-exports.obtenerTasks = async (event) => {
+exports.obtenerTaskPorId = async (event) => {
   const dynamoDB = new AWS.DynamoDB.DocumentClient();
 
+  const id = event.pathParameters.id;
+
   const result = await dynamoDB
-    .scan({
+    .get({
       TableName: "taskTable1",
+      Key: { id },
     })
     .promise();
 
-  const tareas = result.Items;
-
   return {
     statusCode: 200,
-    body: JSON.stringify(tareas),
+    body: JSON.stringify(result.Item || { error: "Tarea no encontrada" }),
   };
 };
